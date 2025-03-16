@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package users;
+
+option go_package = "github.com/ttrtcixy/user-protos/gen/go/users";
+
+service UsersAuth {
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc Signup(SignupRequest) returns (SignupResponse) {}
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {}
+}
+
+message LoginRequest {
+  oneof auth_method { 
+    string username = 1;
+    string email = 2;
+  }
+  string password = 3;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message SignupRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message SignupResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+}
+
+message LogoutRequest {
+  int64 user_id = 1;
+}
