@@ -3,7 +3,7 @@ import "google/protobuf/empty.proto";
 
 package users;
 
-option go_package = "github.com/ttrtcixy/user-protos/gen/go/users";
+option go_package = "github.com/ttrtcixy/user-protos/gen/go/users-proto";
 
 service UsersAuth {
   rpc Login(LoginRequest) returns (LoginResponse) {}
