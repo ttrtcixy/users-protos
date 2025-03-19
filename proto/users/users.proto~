@@ -6,9 +6,9 @@ package users;
 option go_package = "github.com/ttrtcixy/user-protos/gen/go/users-protos";
 
 service UsersAuth {
-  rpc Signin(SigninRequest) returns (SigninResponse) {}
+  rpc Login(SigninRequest) returns (SigninResponse) {}
   rpc Signup(SignupRequest) returns (SignupResponse) {}
-  rpc Signout(SignoutRequest) returns (google.protobuf.Empty) {}
+  rpc Logout(SignoutRequest) returns (google.protobuf.Empty) {}
 }
 
 message SigninRequest {
