@@ -20,18 +20,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UsersAuth_Login_FullMethodName  = "/users.UsersAuth/Login"
-	UsersAuth_Signup_FullMethodName = "/users.UsersAuth/Signup"
-	UsersAuth_Logout_FullMethodName = "/users.UsersAuth/Logout"
+	UsersAuth_Signin_FullMethodName  = "/users.UsersAuth/Signin"
+	UsersAuth_Signup_FullMethodName  = "/users.UsersAuth/Signup"
+	UsersAuth_Signout_FullMethodName = "/users.UsersAuth/Signout"
 )
 
 // UsersAuthClient is the client API for UsersAuth service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UsersAuthClient interface {
-	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	Signin(ctx context.Context, in *SigninRequest, opts ...grpc.CallOption) (*SigninResponse, error)
 	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error)
-	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Signout(ctx context.Context, in *SignoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type usersAuthClient struct {
@@ -42,10 +42,10 @@ func NewUsersAuthClient(cc grpc.ClientConnInterface) UsersAuthClient {
 	return &usersAuthClient{cc}
 }
 
-func (c *usersAuthClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *usersAuthClient) Signin(ctx context.Context, in *SigninRequest, opts ...grpc.CallOption) (*SigninResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(LoginResponse)
-	err := c.cc.Invoke(ctx, UsersAuth_Login_FullMethodName, in, out, cOpts...)
+	out := new(SigninResponse)
+	err := c.cc.Invoke(ctx, UsersAuth_Signin_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,10 +62,10 @@ func (c *usersAuthClient) Signup(ctx context.Context, in *SignupRequest, opts ..
 	return out, nil
 }
 
-func (c *usersAuthClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *usersAuthClient) Signout(ctx context.Context, in *SignoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, UsersAuth_Logout_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UsersAuth_Signout_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,9 +76,9 @@ func (c *usersAuthClient) Logout(ctx context.Context, in *LogoutRequest, opts ..
 // All implementations must embed UnimplementedUsersAuthServer
 // for forward compatibility.
 type UsersAuthServer interface {
-	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	Signin(context.Context, *SigninRequest) (*SigninResponse, error)
 	Signup(context.Context, *SignupRequest) (*SignupResponse, error)
-	Logout(context.Context, *LogoutRequest) (*emptypb.Empty, error)
+	Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedUsersAuthServer()
 }
 
@@ -89,14 +89,14 @@ type UsersAuthServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUsersAuthServer struct{}
 
-func (UnimplementedUsersAuthServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+func (UnimplementedUsersAuthServer) Signin(context.Context, *SigninRequest) (*SigninResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Signin not implemented")
 }
 func (UnimplementedUsersAuthServer) Signup(context.Context, *SignupRequest) (*SignupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Signup not implemented")
 }
-func (UnimplementedUsersAuthServer) Logout(context.Context, *LogoutRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
+func (UnimplementedUsersAuthServer) Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Signout not implemented")
 }
 func (UnimplementedUsersAuthServer) mustEmbedUnimplementedUsersAuthServer() {}
 func (UnimplementedUsersAuthServer) testEmbeddedByValue()                   {}
@@ -119,20 +119,20 @@ func RegisterUsersAuthServer(s grpc.ServiceRegistrar, srv UsersAuthServer) {
 	s.RegisterService(&UsersAuth_ServiceDesc, srv)
 }
 
-func _UsersAuth_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginRequest)
+func _UsersAuth_Signin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SigninRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsersAuthServer).Login(ctx, in)
+		return srv.(UsersAuthServer).Signin(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsersAuth_Login_FullMethodName,
+		FullMethod: UsersAuth_Signin_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersAuthServer).Login(ctx, req.(*LoginRequest))
+		return srv.(UsersAuthServer).Signin(ctx, req.(*SigninRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -155,20 +155,20 @@ func _UsersAuth_Signup_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UsersAuth_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LogoutRequest)
+func _UsersAuth_Signout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SignoutRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UsersAuthServer).Logout(ctx, in)
+		return srv.(UsersAuthServer).Signout(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UsersAuth_Logout_FullMethodName,
+		FullMethod: UsersAuth_Signout_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersAuthServer).Logout(ctx, req.(*LogoutRequest))
+		return srv.(UsersAuthServer).Signout(ctx, req.(*SignoutRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -181,16 +181,16 @@ var UsersAuth_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UsersAuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _UsersAuth_Login_Handler,
+			MethodName: "Signin",
+			Handler:    _UsersAuth_Signin_Handler,
 		},
 		{
 			MethodName: "Signup",
 			Handler:    _UsersAuth_Signup_Handler,
 		},
 		{
-			MethodName: "Logout",
-			Handler:    _UsersAuth_Logout_Handler,
+			MethodName: "Signout",
+			Handler:    _UsersAuth_Signout_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
