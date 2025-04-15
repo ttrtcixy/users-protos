@@ -4,7 +4,7 @@
 // 	protoc        v6.30.2
 // source: users/auth.proto
 
-package users_proto
+package users
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -345,7 +345,7 @@ const file_users_auth_proto_rawDesc = "" +
 	"\tUsersAuth\x124\n" +
 	"\x05Login\x12\x13.users.LoginRequest\x1a\x14.users.LoginResponse\"\x00\x127\n" +
 	"\x06Signup\x12\x14.users.SignupRequest\x1a\x15.users.SignupResponse\"\x00\x128\n" +
-	"\x06Logout\x12\x14.users.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x00B\x15Z\x13/gen/go/users-protob\x06proto3"
+	"\x06Logout\x12\x14.users.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x00B\x0fZ\r/gen/go/usersb\x06proto3"
 
 var (
 	file_users_auth_proto_rawDescOnce sync.Once
