@@ -146,7 +146,7 @@ const file_users_users_proto_rawDesc = "" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x04 \x01(\tR\bpassword2C\n" +
 	"\x05Users\x12:\n" +
-	"\aGetUser\x12\x15.users.GetUserRequest\x1a\x16.users.GetUserResponse\"\x00B\x0fZ\r/gen/go/usersb\x06proto3"
+	"\aGetUser\x12\x15.users.GetUserRequest\x1a\x16.users.GetUserResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
 
 var (
 	file_users_users_proto_rawDescOnce sync.Once

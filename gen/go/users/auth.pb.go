@@ -392,7 +392,7 @@ const file_users_auth_proto_rawDesc = "" +
 	"\x06Signin\x12\x14.users.SigninRequest\x1a\x15.users.SigninResponse\"\x00\x128\n" +
 	"\x06Signup\x12\x14.users.SignupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
 	"\aSignout\x12\x15.users.SignoutRequest\x1a\x16.google.protobuf.Empty\"\x00\x127\n" +
-	"\x06Verify\x12\x14.users.VerifyRequest\x1a\x15.users.VerifyResponse\"\x00B\x0fZ\r/gen/go/usersb\x06proto3"
+	"\x06Verify\x12\x14.users.VerifyRequest\x1a\x15.users.VerifyResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
 
 var (
 	file_users_auth_proto_rawDescOnce sync.Once
