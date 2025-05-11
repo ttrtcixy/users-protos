@@ -9,6 +9,7 @@ service UsersAuth {
   rpc Signin(SigninRequest) returns (SigninResponse) {}
   rpc Signup(SignupRequest) returns (SignupResponse) {}
   rpc Signout(SignoutRequest) returns (google.protobuf.Empty) {}
+  rpc Verify(VerifyRequest) returns (VerifyResponse) {}
 }
 
 message SigninRequest {
@@ -31,6 +32,13 @@ message SignupRequest {
 }
 
 message SignupResponse {
+}
+
+message VerifyRequest {
+  string jwt_token = 1;
+}
+
+message VerifyResponse {
   string access_token = 1;
   string refresh_token = 2;
 }
