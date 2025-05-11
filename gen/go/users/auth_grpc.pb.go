@@ -31,7 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UsersAuthClient interface {
 	Signin(ctx context.Context, in *SigninRequest, opts ...grpc.CallOption) (*SigninResponse, error)
-	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error)
+	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Signout(ctx context.Context, in *SignoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*VerifyResponse, error)
 }
@@ -54,9 +54,9 @@ func (c *usersAuthClient) Signin(ctx context.Context, in *SigninRequest, opts ..
 	return out, nil
 }
 
-func (c *usersAuthClient) Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*SignupResponse, error) {
+func (c *usersAuthClient) Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SignupResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, UsersAuth_Signup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -89,7 +89,7 @@ func (c *usersAuthClient) Verify(ctx context.Context, in *VerifyRequest, opts ..
 // for forward compatibility.
 type UsersAuthServer interface {
 	Signin(context.Context, *SigninRequest) (*SigninResponse, error)
-	Signup(context.Context, *SignupRequest) (*SignupResponse, error)
+	Signup(context.Context, *SignupRequest) (*emptypb.Empty, error)
 	Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error)
 	Verify(context.Context, *VerifyRequest) (*VerifyResponse, error)
 	mustEmbedUnimplementedUsersAuthServer()
@@ -105,7 +105,7 @@ type UnimplementedUsersAuthServer struct{}
 func (UnimplementedUsersAuthServer) Signin(context.Context, *SigninRequest) (*SigninResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Signin not implemented")
 }
-func (UnimplementedUsersAuthServer) Signup(context.Context, *SignupRequest) (*SignupResponse, error) {
+func (UnimplementedUsersAuthServer) Signup(context.Context, *SignupRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Signup not implemented")
 }
 func (UnimplementedUsersAuthServer) Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error) {
