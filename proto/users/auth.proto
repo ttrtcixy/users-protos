@@ -10,6 +10,16 @@ service UsersAuth {
   rpc Signup(SignupRequest) returns (google.protobuf.Empty) {}
   rpc Signout(SignoutRequest) returns (google.protobuf.Empty) {}
   rpc Verify(VerifyRequest) returns (VerifyResponse) {}
+  rpc Refresh(RefreshRequest) returns (RefreshResponse) {}
+}
+
+message RefreshRequest {
+  string refresh_token = 1;
+}
+
+message RefreshResponse {
+  string access_token = 1;
+  string refresh_token = 2;
 }
 
 message SigninRequest {

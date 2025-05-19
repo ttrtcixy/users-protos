@@ -22,6 +22,102 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type RefreshRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshRequest) Reset() {
+	*x = RefreshRequest{}
+	mi := &file_users_auth_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshRequest) ProtoMessage() {}
+
+func (x *RefreshRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_users_auth_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshRequest.ProtoReflect.Descriptor instead.
+func (*RefreshRequest) Descriptor() ([]byte, []int) {
+	return file_users_auth_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *RefreshRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+type RefreshResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshResponse) Reset() {
+	*x = RefreshResponse{}
+	mi := &file_users_auth_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshResponse) ProtoMessage() {}
+
+func (x *RefreshResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_users_auth_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshResponse.ProtoReflect.Descriptor instead.
+func (*RefreshResponse) Descriptor() ([]byte, []int) {
+	return file_users_auth_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *RefreshResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RefreshResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
 type SigninRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to AuthMethod:
@@ -36,7 +132,7 @@ type SigninRequest struct {
 
 func (x *SigninRequest) Reset() {
 	*x = SigninRequest{}
-	mi := &file_users_auth_proto_msgTypes[0]
+	mi := &file_users_auth_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48,7 +144,7 @@ func (x *SigninRequest) String() string {
 func (*SigninRequest) ProtoMessage() {}
 
 func (x *SigninRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[0]
+	mi := &file_users_auth_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +157,7 @@ func (x *SigninRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SigninRequest.ProtoReflect.Descriptor instead.
 func (*SigninRequest) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{0}
+	return file_users_auth_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SigninRequest) GetAuthMethod() isSigninRequest_AuthMethod {
@@ -122,7 +218,7 @@ type SigninResponse struct {
 
 func (x *SigninResponse) Reset() {
 	*x = SigninResponse{}
-	mi := &file_users_auth_proto_msgTypes[1]
+	mi := &file_users_auth_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -134,7 +230,7 @@ func (x *SigninResponse) String() string {
 func (*SigninResponse) ProtoMessage() {}
 
 func (x *SigninResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[1]
+	mi := &file_users_auth_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -147,7 +243,7 @@ func (x *SigninResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SigninResponse.ProtoReflect.Descriptor instead.
 func (*SigninResponse) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{1}
+	return file_users_auth_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *SigninResponse) GetAccessToken() string {
@@ -175,7 +271,7 @@ type SignupRequest struct {
 
 func (x *SignupRequest) Reset() {
 	*x = SignupRequest{}
-	mi := &file_users_auth_proto_msgTypes[2]
+	mi := &file_users_auth_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -187,7 +283,7 @@ func (x *SignupRequest) String() string {
 func (*SignupRequest) ProtoMessage() {}
 
 func (x *SignupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[2]
+	mi := &file_users_auth_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -200,7 +296,7 @@ func (x *SignupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignupRequest.ProtoReflect.Descriptor instead.
 func (*SignupRequest) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{2}
+	return file_users_auth_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SignupRequest) GetUsername() string {
@@ -233,7 +329,7 @@ type VerifyRequest struct {
 
 func (x *VerifyRequest) Reset() {
 	*x = VerifyRequest{}
-	mi := &file_users_auth_proto_msgTypes[3]
+	mi := &file_users_auth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -245,7 +341,7 @@ func (x *VerifyRequest) String() string {
 func (*VerifyRequest) ProtoMessage() {}
 
 func (x *VerifyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[3]
+	mi := &file_users_auth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -258,7 +354,7 @@ func (x *VerifyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyRequest.ProtoReflect.Descriptor instead.
 func (*VerifyRequest) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{3}
+	return file_users_auth_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *VerifyRequest) GetJwtToken() string {
@@ -278,7 +374,7 @@ type VerifyResponse struct {
 
 func (x *VerifyResponse) Reset() {
 	*x = VerifyResponse{}
-	mi := &file_users_auth_proto_msgTypes[4]
+	mi := &file_users_auth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -290,7 +386,7 @@ func (x *VerifyResponse) String() string {
 func (*VerifyResponse) ProtoMessage() {}
 
 func (x *VerifyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[4]
+	mi := &file_users_auth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -303,7 +399,7 @@ func (x *VerifyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyResponse.ProtoReflect.Descriptor instead.
 func (*VerifyResponse) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{4}
+	return file_users_auth_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *VerifyResponse) GetAccessToken() string {
@@ -329,7 +425,7 @@ type SignoutRequest struct {
 
 func (x *SignoutRequest) Reset() {
 	*x = SignoutRequest{}
-	mi := &file_users_auth_proto_msgTypes[5]
+	mi := &file_users_auth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -341,7 +437,7 @@ func (x *SignoutRequest) String() string {
 func (*SignoutRequest) ProtoMessage() {}
 
 func (x *SignoutRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_users_auth_proto_msgTypes[5]
+	mi := &file_users_auth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -354,7 +450,7 @@ func (x *SignoutRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignoutRequest.ProtoReflect.Descriptor instead.
 func (*SignoutRequest) Descriptor() ([]byte, []int) {
-	return file_users_auth_proto_rawDescGZIP(), []int{5}
+	return file_users_auth_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SignoutRequest) GetUserId() int64 {
@@ -368,7 +464,12 @@ var File_users_auth_proto protoreflect.FileDescriptor
 
 const file_users_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x10users/auth.proto\x12\x05users\x1a\x1bgoogle/protobuf/empty.proto\"p\n" +
+	"\x10users/auth.proto\x12\x05users\x1a\x1bgoogle/protobuf/empty.proto\"5\n" +
+	"\x0eRefreshRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"Y\n" +
+	"\x0fRefreshResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"p\n" +
 	"\rSigninRequest\x12\x1c\n" +
 	"\busername\x18\x01 \x01(\tH\x00R\busername\x12\x16\n" +
 	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x12\x1a\n" +
@@ -387,12 +488,13 @@ const file_users_auth_proto_rawDesc = "" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\")\n" +
 	"\x0eSignoutRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId2\xf3\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId2\xaf\x02\n" +
 	"\tUsersAuth\x127\n" +
 	"\x06Signin\x12\x14.users.SigninRequest\x1a\x15.users.SigninResponse\"\x00\x128\n" +
 	"\x06Signup\x12\x14.users.SignupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
 	"\aSignout\x12\x15.users.SignoutRequest\x1a\x16.google.protobuf.Empty\"\x00\x127\n" +
-	"\x06Verify\x12\x14.users.VerifyRequest\x1a\x15.users.VerifyResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
+	"\x06Verify\x12\x14.users.VerifyRequest\x1a\x15.users.VerifyResponse\"\x00\x12:\n" +
+	"\aRefresh\x12\x15.users.RefreshRequest\x1a\x16.users.RefreshResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
 
 var (
 	file_users_auth_proto_rawDescOnce sync.Once
@@ -406,27 +508,31 @@ func file_users_auth_proto_rawDescGZIP() []byte {
 	return file_users_auth_proto_rawDescData
 }
 
-var file_users_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_users_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_users_auth_proto_goTypes = []any{
-	(*SigninRequest)(nil),  // 0: users.SigninRequest
-	(*SigninResponse)(nil), // 1: users.SigninResponse
-	(*SignupRequest)(nil),  // 2: users.SignupRequest
-	(*VerifyRequest)(nil),  // 3: users.VerifyRequest
-	(*VerifyResponse)(nil), // 4: users.VerifyResponse
-	(*SignoutRequest)(nil), // 5: users.SignoutRequest
-	(*emptypb.Empty)(nil),  // 6: google.protobuf.Empty
+	(*RefreshRequest)(nil),  // 0: users.RefreshRequest
+	(*RefreshResponse)(nil), // 1: users.RefreshResponse
+	(*SigninRequest)(nil),   // 2: users.SigninRequest
+	(*SigninResponse)(nil),  // 3: users.SigninResponse
+	(*SignupRequest)(nil),   // 4: users.SignupRequest
+	(*VerifyRequest)(nil),   // 5: users.VerifyRequest
+	(*VerifyResponse)(nil),  // 6: users.VerifyResponse
+	(*SignoutRequest)(nil),  // 7: users.SignoutRequest
+	(*emptypb.Empty)(nil),   // 8: google.protobuf.Empty
 }
 var file_users_auth_proto_depIdxs = []int32{
-	0, // 0: users.UsersAuth.Signin:input_type -> users.SigninRequest
-	2, // 1: users.UsersAuth.Signup:input_type -> users.SignupRequest
-	5, // 2: users.UsersAuth.Signout:input_type -> users.SignoutRequest
-	3, // 3: users.UsersAuth.Verify:input_type -> users.VerifyRequest
-	1, // 4: users.UsersAuth.Signin:output_type -> users.SigninResponse
-	6, // 5: users.UsersAuth.Signup:output_type -> google.protobuf.Empty
-	6, // 6: users.UsersAuth.Signout:output_type -> google.protobuf.Empty
-	4, // 7: users.UsersAuth.Verify:output_type -> users.VerifyResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	2, // 0: users.UsersAuth.Signin:input_type -> users.SigninRequest
+	4, // 1: users.UsersAuth.Signup:input_type -> users.SignupRequest
+	7, // 2: users.UsersAuth.Signout:input_type -> users.SignoutRequest
+	5, // 3: users.UsersAuth.Verify:input_type -> users.VerifyRequest
+	0, // 4: users.UsersAuth.Refresh:input_type -> users.RefreshRequest
+	3, // 5: users.UsersAuth.Signin:output_type -> users.SigninResponse
+	8, // 6: users.UsersAuth.Signup:output_type -> google.protobuf.Empty
+	8, // 7: users.UsersAuth.Signout:output_type -> google.protobuf.Empty
+	6, // 8: users.UsersAuth.Verify:output_type -> users.VerifyResponse
+	1, // 9: users.UsersAuth.Refresh:output_type -> users.RefreshResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -437,7 +543,7 @@ func file_users_auth_proto_init() {
 	if File_users_auth_proto != nil {
 		return
 	}
-	file_users_auth_proto_msgTypes[0].OneofWrappers = []any{
+	file_users_auth_proto_msgTypes[2].OneofWrappers = []any{
 		(*SigninRequest_Username)(nil),
 		(*SigninRequest_Email)(nil),
 	}
@@ -447,7 +553,7 @@ func file_users_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_users_auth_proto_rawDesc), len(file_users_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

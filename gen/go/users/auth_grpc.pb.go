@@ -24,6 +24,7 @@ const (
 	UsersAuth_Signup_FullMethodName  = "/users.UsersAuth/Signup"
 	UsersAuth_Signout_FullMethodName = "/users.UsersAuth/Signout"
 	UsersAuth_Verify_FullMethodName  = "/users.UsersAuth/Verify"
+	UsersAuth_Refresh_FullMethodName = "/users.UsersAuth/Refresh"
 )
 
 // UsersAuthClient is the client API for UsersAuth service.
@@ -34,6 +35,7 @@ type UsersAuthClient interface {
 	Signup(ctx context.Context, in *SignupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Signout(ctx context.Context, in *SignoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Verify(ctx context.Context, in *VerifyRequest, opts ...grpc.CallOption) (*VerifyResponse, error)
+	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error)
 }
 
 type usersAuthClient struct {
@@ -84,6 +86,16 @@ func (c *usersAuthClient) Verify(ctx context.Context, in *VerifyRequest, opts ..
 	return out, nil
 }
 
+func (c *usersAuthClient) Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefreshResponse)
+	err := c.cc.Invoke(ctx, UsersAuth_Refresh_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsersAuthServer is the server API for UsersAuth service.
 // All implementations must embed UnimplementedUsersAuthServer
 // for forward compatibility.
@@ -92,6 +104,7 @@ type UsersAuthServer interface {
 	Signup(context.Context, *SignupRequest) (*emptypb.Empty, error)
 	Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error)
 	Verify(context.Context, *VerifyRequest) (*VerifyResponse, error)
+	Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error)
 	mustEmbedUnimplementedUsersAuthServer()
 }
 
@@ -113,6 +126,9 @@ func (UnimplementedUsersAuthServer) Signout(context.Context, *SignoutRequest) (*
 }
 func (UnimplementedUsersAuthServer) Verify(context.Context, *VerifyRequest) (*VerifyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Verify not implemented")
+}
+func (UnimplementedUsersAuthServer) Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
 func (UnimplementedUsersAuthServer) mustEmbedUnimplementedUsersAuthServer() {}
 func (UnimplementedUsersAuthServer) testEmbeddedByValue()                   {}
@@ -207,6 +223,24 @@ func _UsersAuth_Verify_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UsersAuth_Refresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersAuthServer).Refresh(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UsersAuth_Refresh_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersAuthServer).Refresh(ctx, req.(*RefreshRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UsersAuth_ServiceDesc is the grpc.ServiceDesc for UsersAuth service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -229,6 +263,10 @@ var UsersAuth_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Verify",
 			Handler:    _UsersAuth_Verify_Handler,
+		},
+		{
+			MethodName: "Refresh",
+			Handler:    _UsersAuth_Refresh_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
