@@ -25,6 +25,7 @@ const (
 type RefreshRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ClientId      string                 `protobuf:"bytes,2,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // refactor
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -62,6 +63,13 @@ func (*RefreshRequest) Descriptor() ([]byte, []int) {
 func (x *RefreshRequest) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
 	}
 	return ""
 }
@@ -212,6 +220,7 @@ type SigninResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ClientId      string                 `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // refactor
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -256,6 +265,13 @@ func (x *SigninResponse) GetAccessToken() string {
 func (x *SigninResponse) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *SigninResponse) GetClientId() string {
+	if x != nil {
+		return x.ClientId
 	}
 	return ""
 }
@@ -321,10 +337,10 @@ func (x *SignupRequest) GetPassword() string {
 }
 
 type VerifyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	JwtToken      string                 `protobuf:"bytes,1,opt,name=jwt_token,json=jwtToken,proto3" json:"jwt_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	JwtEmailVerifyToken string                 `protobuf:"bytes,1,opt,name=jwt_email_verify_token,json=jwtEmailVerifyToken,proto3" json:"jwt_email_verify_token,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *VerifyRequest) Reset() {
@@ -357,9 +373,9 @@ func (*VerifyRequest) Descriptor() ([]byte, []int) {
 	return file_users_auth_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *VerifyRequest) GetJwtToken() string {
+func (x *VerifyRequest) GetJwtEmailVerifyToken() string {
 	if x != nil {
-		return x.JwtToken
+		return x.JwtEmailVerifyToken
 	}
 	return ""
 }
@@ -368,6 +384,7 @@ type VerifyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	ClientId      string                 `protobuf:"bytes,3,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // refactor
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -416,9 +433,16 @@ func (x *VerifyResponse) GetRefreshToken() string {
 	return ""
 }
 
+func (x *VerifyResponse) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
 type SignoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"` // refactor
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -453,20 +477,21 @@ func (*SignoutRequest) Descriptor() ([]byte, []int) {
 	return file_users_auth_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *SignoutRequest) GetUserId() int64 {
+func (x *SignoutRequest) GetClientId() string {
 	if x != nil {
-		return x.UserId
+		return x.ClientId
 	}
-	return 0
+	return ""
 }
 
 var File_users_auth_proto protoreflect.FileDescriptor
 
 const file_users_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x10users/auth.proto\x12\x05users\x1a\x1bgoogle/protobuf/empty.proto\"5\n" +
+	"\x10users/auth.proto\x12\x05users\x1a\x1bgoogle/protobuf/empty.proto\"R\n" +
 	"\x0eRefreshRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"Y\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\x12\x1b\n" +
+	"\tclient_id\x18\x02 \x01(\tR\bclientId\"Y\n" +
 	"\x0fRefreshResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"p\n" +
@@ -474,21 +499,23 @@ const file_users_auth_proto_rawDesc = "" +
 	"\busername\x18\x01 \x01(\tH\x00R\busername\x12\x16\n" +
 	"\x05email\x18\x02 \x01(\tH\x00R\x05email\x12\x1a\n" +
 	"\bpassword\x18\x03 \x01(\tR\bpasswordB\r\n" +
-	"\vauth_method\"X\n" +
+	"\vauth_method\"u\n" +
 	"\x0eSigninResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"]\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1b\n" +
+	"\tclient_id\x18\x03 \x01(\tR\bclientId\"]\n" +
 	"\rSignupRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\",\n" +
-	"\rVerifyRequest\x12\x1b\n" +
-	"\tjwt_token\x18\x01 \x01(\tR\bjwtToken\"X\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"D\n" +
+	"\rVerifyRequest\x123\n" +
+	"\x16jwt_email_verify_token\x18\x01 \x01(\tR\x13jwtEmailVerifyToken\"u\n" +
 	"\x0eVerifyResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\")\n" +
-	"\x0eSignoutRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId2\xaf\x02\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1b\n" +
+	"\tclient_id\x18\x03 \x01(\tR\bclientId\"-\n" +
+	"\x0eSignoutRequest\x12\x1b\n" +
+	"\tclient_id\x18\x01 \x01(\tR\bclientId2\xaf\x02\n" +
 	"\tUsersAuth\x127\n" +
 	"\x06Signin\x12\x14.users.SigninRequest\x1a\x15.users.SigninResponse\"\x00\x128\n" +
 	"\x06Signup\x12\x14.users.SignupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +

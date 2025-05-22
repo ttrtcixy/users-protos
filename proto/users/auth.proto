@@ -15,6 +15,7 @@ service UsersAuth {
 
 message RefreshRequest {
   string refresh_token = 1;
+  string client_id = 2; // refactor
 }
 
 message RefreshResponse {
@@ -33,6 +34,7 @@ message SigninRequest {
 message SigninResponse {
   string access_token = 1;
   string refresh_token = 2;
+  string client_id = 3; // refactor
 }
 
 message SignupRequest {
@@ -42,14 +44,15 @@ message SignupRequest {
 }
 
 message VerifyRequest {
-  string jwt_token = 1;
+  string jwt_email_verify_token = 1;
 }
 
 message VerifyResponse {
   string access_token = 1;
   string refresh_token = 2;
+  string client_id = 3; // refactor
 }
 
 message SignoutRequest {
-  int64 user_id = 1;
+  string client_id = 1; // refactor
 }
