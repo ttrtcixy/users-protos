@@ -36,27 +36,14 @@ message UserData {
   string role_id = 4;
 }
 
-message TokenRefreshData {
-  string new_access_token = 1;
+message TokenUpdate {
+  optional string new_access_token = 1;
   optional string new_refresh_token = 2;
 }
 
-message Error {
-  string message = 1;
-  enum Code {
-    INVALID_TOKEN = 0;
-    EXPIRED_TOKEN = 1;
-    BANNED_USER = 2;
-  }
-  Code code = 2;
-}
-
 message VerifyAccessTokenResponse {
-  oneof result {
-    UserData success = 1;
-    TokenRefreshData refresh = 2;
-    Error error = 3;
-  }
+  UserData user_data = 1;
+  optional TokenUpdate token_update = 2;
 }
 
 message SigninRequest {
@@ -86,9 +73,9 @@ message VerifyEmailRequest {
 message VerifyEmailResponse {
   string access_token = 1;
   string refresh_token = 2;
-  string client_id = 3; // refactor
+  string client_id = 3;
 }
 
 message SignoutRequest {
-  string client_id = 1; // refactor
+  string client_id = 1;
 }
