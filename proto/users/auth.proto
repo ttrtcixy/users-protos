@@ -11,7 +11,7 @@ service UsersAuth {
   rpc Signout(SignoutRequest) returns (google.protobuf.Empty) {}
   rpc VerifyEmail(VerifyEmailRequest) returns (VerifyEmailResponse) {}
   rpc Refresh(RefreshRequest) returns (RefreshResponse) {}
-  rpc VerifyToken(VerifyAccessTokenRequest) returns (VerifyAccessTokenResponse) {}
+  rpc VerifyToken(VerifyTokensRequest) returns (VerifyTokensResponse) {}
 }
 
 message RefreshRequest {
@@ -24,7 +24,7 @@ message RefreshResponse {
   string refresh_token = 2;
 }
 
-message VerifyAccessTokenRequest {
+message VerifyTokensRequest {
   string access_token = 1;
   optional string refresh_token = 2;
 }
@@ -41,7 +41,7 @@ message TokenUpdate {
   optional string new_refresh_token = 2;
 }
 
-message VerifyAccessTokenResponse {
+message VerifyTokensResponse {
   UserData user_data = 1;
   optional TokenUpdate token_update = 2;
 }

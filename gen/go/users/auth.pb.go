@@ -126,7 +126,7 @@ func (x *RefreshResponse) GetRefreshToken() string {
 	return ""
 }
 
-type VerifyAccessTokenRequest struct {
+type VerifyTokensRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken  *string                `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3,oneof" json:"refresh_token,omitempty"`
@@ -134,20 +134,20 @@ type VerifyAccessTokenRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyAccessTokenRequest) Reset() {
-	*x = VerifyAccessTokenRequest{}
+func (x *VerifyTokensRequest) Reset() {
+	*x = VerifyTokensRequest{}
 	mi := &file_users_auth_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyAccessTokenRequest) String() string {
+func (x *VerifyTokensRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyAccessTokenRequest) ProtoMessage() {}
+func (*VerifyTokensRequest) ProtoMessage() {}
 
-func (x *VerifyAccessTokenRequest) ProtoReflect() protoreflect.Message {
+func (x *VerifyTokensRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_users_auth_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -159,19 +159,19 @@ func (x *VerifyAccessTokenRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyAccessTokenRequest.ProtoReflect.Descriptor instead.
-func (*VerifyAccessTokenRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use VerifyTokensRequest.ProtoReflect.Descriptor instead.
+func (*VerifyTokensRequest) Descriptor() ([]byte, []int) {
 	return file_users_auth_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *VerifyAccessTokenRequest) GetAccessToken() string {
+func (x *VerifyTokensRequest) GetAccessToken() string {
 	if x != nil {
 		return x.AccessToken
 	}
 	return ""
 }
 
-func (x *VerifyAccessTokenRequest) GetRefreshToken() string {
+func (x *VerifyTokensRequest) GetRefreshToken() string {
 	if x != nil && x.RefreshToken != nil {
 		return *x.RefreshToken
 	}
@@ -298,7 +298,7 @@ func (x *TokenUpdate) GetNewRefreshToken() string {
 	return ""
 }
 
-type VerifyAccessTokenResponse struct {
+type VerifyTokensResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserData      *UserData              `protobuf:"bytes,1,opt,name=user_data,json=userData,proto3" json:"user_data,omitempty"`
 	TokenUpdate   *TokenUpdate           `protobuf:"bytes,2,opt,name=token_update,json=tokenUpdate,proto3,oneof" json:"token_update,omitempty"`
@@ -306,20 +306,20 @@ type VerifyAccessTokenResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyAccessTokenResponse) Reset() {
-	*x = VerifyAccessTokenResponse{}
+func (x *VerifyTokensResponse) Reset() {
+	*x = VerifyTokensResponse{}
 	mi := &file_users_auth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyAccessTokenResponse) String() string {
+func (x *VerifyTokensResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyAccessTokenResponse) ProtoMessage() {}
+func (*VerifyTokensResponse) ProtoMessage() {}
 
-func (x *VerifyAccessTokenResponse) ProtoReflect() protoreflect.Message {
+func (x *VerifyTokensResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_users_auth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -331,19 +331,19 @@ func (x *VerifyAccessTokenResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyAccessTokenResponse.ProtoReflect.Descriptor instead.
-func (*VerifyAccessTokenResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use VerifyTokensResponse.ProtoReflect.Descriptor instead.
+func (*VerifyTokensResponse) Descriptor() ([]byte, []int) {
 	return file_users_auth_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *VerifyAccessTokenResponse) GetUserData() *UserData {
+func (x *VerifyTokensResponse) GetUserData() *UserData {
 	if x != nil {
 		return x.UserData
 	}
 	return nil
 }
 
-func (x *VerifyAccessTokenResponse) GetTokenUpdate() *TokenUpdate {
+func (x *VerifyTokensResponse) GetTokenUpdate() *TokenUpdate {
 	if x != nil {
 		return x.TokenUpdate
 	}
@@ -718,8 +718,8 @@ const file_users_auth_proto_rawDesc = "" +
 	"\tclient_id\x18\x02 \x01(\tR\bclientId\"Y\n" +
 	"\x0fRefreshResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"y\n" +
-	"\x18VerifyAccessTokenRequest\x12!\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\"t\n" +
+	"\x13VerifyTokensRequest\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12(\n" +
 	"\rrefresh_token\x18\x02 \x01(\tH\x00R\frefreshToken\x88\x01\x01B\x10\n" +
 	"\x0e_refresh_token\"e\n" +
@@ -732,8 +732,8 @@ const file_users_auth_proto_rawDesc = "" +
 	"\x10new_access_token\x18\x01 \x01(\tH\x00R\x0enewAccessToken\x88\x01\x01\x12/\n" +
 	"\x11new_refresh_token\x18\x02 \x01(\tH\x01R\x0fnewRefreshToken\x88\x01\x01B\x13\n" +
 	"\x11_new_access_tokenB\x14\n" +
-	"\x12_new_refresh_token\"\x96\x01\n" +
-	"\x19VerifyAccessTokenResponse\x12,\n" +
+	"\x12_new_refresh_token\"\x91\x01\n" +
+	"\x14VerifyTokensResponse\x12,\n" +
 	"\tuser_data\x18\x01 \x01(\v2\x0f.users.UserDataR\buserData\x12:\n" +
 	"\ftoken_update\x18\x02 \x01(\v2\x12.users.TokenUpdateH\x00R\vtokenUpdate\x88\x01\x01B\x0f\n" +
 	"\r_token_update\"p\n" +
@@ -757,14 +757,14 @@ const file_users_auth_proto_rawDesc = "" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1b\n" +
 	"\tclient_id\x18\x03 \x01(\tR\bclientId\"-\n" +
 	"\x0eSignoutRequest\x12\x1b\n" +
-	"\tclient_id\x18\x01 \x01(\tR\bclientId2\x92\x03\n" +
+	"\tclient_id\x18\x01 \x01(\tR\bclientId2\x88\x03\n" +
 	"\tUsersAuth\x127\n" +
 	"\x06Signin\x12\x14.users.SigninRequest\x1a\x15.users.SigninResponse\"\x00\x128\n" +
 	"\x06Signup\x12\x14.users.SignupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12:\n" +
 	"\aSignout\x12\x15.users.SignoutRequest\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
 	"\vVerifyEmail\x12\x19.users.VerifyEmailRequest\x1a\x1a.users.VerifyEmailResponse\"\x00\x12:\n" +
-	"\aRefresh\x12\x15.users.RefreshRequest\x1a\x16.users.RefreshResponse\"\x00\x12R\n" +
-	"\vVerifyToken\x12\x1f.users.VerifyAccessTokenRequest\x1a .users.VerifyAccessTokenResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
+	"\aRefresh\x12\x15.users.RefreshRequest\x1a\x16.users.RefreshResponse\"\x00\x12H\n" +
+	"\vVerifyToken\x12\x1a.users.VerifyTokensRequest\x1a\x1b.users.VerifyTokensResponse\"\x00B5Z3github.com/ttrtcixy/users-protos/gen/go/users;usersb\x06proto3"
 
 var (
 	file_users_auth_proto_rawDescOnce sync.Once
@@ -780,35 +780,35 @@ func file_users_auth_proto_rawDescGZIP() []byte {
 
 var file_users_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_users_auth_proto_goTypes = []any{
-	(*RefreshRequest)(nil),            // 0: users.RefreshRequest
-	(*RefreshResponse)(nil),           // 1: users.RefreshResponse
-	(*VerifyAccessTokenRequest)(nil),  // 2: users.VerifyAccessTokenRequest
-	(*UserData)(nil),                  // 3: users.UserData
-	(*TokenUpdate)(nil),               // 4: users.TokenUpdate
-	(*VerifyAccessTokenResponse)(nil), // 5: users.VerifyAccessTokenResponse
-	(*SigninRequest)(nil),             // 6: users.SigninRequest
-	(*SigninResponse)(nil),            // 7: users.SigninResponse
-	(*SignupRequest)(nil),             // 8: users.SignupRequest
-	(*VerifyEmailRequest)(nil),        // 9: users.VerifyEmailRequest
-	(*VerifyEmailResponse)(nil),       // 10: users.VerifyEmailResponse
-	(*SignoutRequest)(nil),            // 11: users.SignoutRequest
-	(*emptypb.Empty)(nil),             // 12: google.protobuf.Empty
+	(*RefreshRequest)(nil),       // 0: users.RefreshRequest
+	(*RefreshResponse)(nil),      // 1: users.RefreshResponse
+	(*VerifyTokensRequest)(nil),  // 2: users.VerifyTokensRequest
+	(*UserData)(nil),             // 3: users.UserData
+	(*TokenUpdate)(nil),          // 4: users.TokenUpdate
+	(*VerifyTokensResponse)(nil), // 5: users.VerifyTokensResponse
+	(*SigninRequest)(nil),        // 6: users.SigninRequest
+	(*SigninResponse)(nil),       // 7: users.SigninResponse
+	(*SignupRequest)(nil),        // 8: users.SignupRequest
+	(*VerifyEmailRequest)(nil),   // 9: users.VerifyEmailRequest
+	(*VerifyEmailResponse)(nil),  // 10: users.VerifyEmailResponse
+	(*SignoutRequest)(nil),       // 11: users.SignoutRequest
+	(*emptypb.Empty)(nil),        // 12: google.protobuf.Empty
 }
 var file_users_auth_proto_depIdxs = []int32{
-	3,  // 0: users.VerifyAccessTokenResponse.user_data:type_name -> users.UserData
-	4,  // 1: users.VerifyAccessTokenResponse.token_update:type_name -> users.TokenUpdate
+	3,  // 0: users.VerifyTokensResponse.user_data:type_name -> users.UserData
+	4,  // 1: users.VerifyTokensResponse.token_update:type_name -> users.TokenUpdate
 	6,  // 2: users.UsersAuth.Signin:input_type -> users.SigninRequest
 	8,  // 3: users.UsersAuth.Signup:input_type -> users.SignupRequest
 	11, // 4: users.UsersAuth.Signout:input_type -> users.SignoutRequest
 	9,  // 5: users.UsersAuth.VerifyEmail:input_type -> users.VerifyEmailRequest
 	0,  // 6: users.UsersAuth.Refresh:input_type -> users.RefreshRequest
-	2,  // 7: users.UsersAuth.VerifyToken:input_type -> users.VerifyAccessTokenRequest
+	2,  // 7: users.UsersAuth.VerifyToken:input_type -> users.VerifyTokensRequest
 	7,  // 8: users.UsersAuth.Signin:output_type -> users.SigninResponse
 	12, // 9: users.UsersAuth.Signup:output_type -> google.protobuf.Empty
 	12, // 10: users.UsersAuth.Signout:output_type -> google.protobuf.Empty
 	10, // 11: users.UsersAuth.VerifyEmail:output_type -> users.VerifyEmailResponse
 	1,  // 12: users.UsersAuth.Refresh:output_type -> users.RefreshResponse
-	5,  // 13: users.UsersAuth.VerifyToken:output_type -> users.VerifyAccessTokenResponse
+	5,  // 13: users.UsersAuth.VerifyToken:output_type -> users.VerifyTokensResponse
 	8,  // [8:14] is the sub-list for method output_type
 	2,  // [2:8] is the sub-list for method input_type
 	2,  // [2:2] is the sub-list for extension type_name

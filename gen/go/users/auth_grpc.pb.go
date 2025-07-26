@@ -37,7 +37,7 @@ type UsersAuthClient interface {
 	Signout(ctx context.Context, in *SignoutRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
 	Refresh(ctx context.Context, in *RefreshRequest, opts ...grpc.CallOption) (*RefreshResponse, error)
-	VerifyToken(ctx context.Context, in *VerifyAccessTokenRequest, opts ...grpc.CallOption) (*VerifyAccessTokenResponse, error)
+	VerifyToken(ctx context.Context, in *VerifyTokensRequest, opts ...grpc.CallOption) (*VerifyTokensResponse, error)
 }
 
 type usersAuthClient struct {
@@ -98,9 +98,9 @@ func (c *usersAuthClient) Refresh(ctx context.Context, in *RefreshRequest, opts 
 	return out, nil
 }
 
-func (c *usersAuthClient) VerifyToken(ctx context.Context, in *VerifyAccessTokenRequest, opts ...grpc.CallOption) (*VerifyAccessTokenResponse, error) {
+func (c *usersAuthClient) VerifyToken(ctx context.Context, in *VerifyTokensRequest, opts ...grpc.CallOption) (*VerifyTokensResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(VerifyAccessTokenResponse)
+	out := new(VerifyTokensResponse)
 	err := c.cc.Invoke(ctx, UsersAuth_VerifyToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type UsersAuthServer interface {
 	Signout(context.Context, *SignoutRequest) (*emptypb.Empty, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
 	Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error)
-	VerifyToken(context.Context, *VerifyAccessTokenRequest) (*VerifyAccessTokenResponse, error)
+	VerifyToken(context.Context, *VerifyTokensRequest) (*VerifyTokensResponse, error)
 	mustEmbedUnimplementedUsersAuthServer()
 }
 
@@ -143,7 +143,7 @@ func (UnimplementedUsersAuthServer) VerifyEmail(context.Context, *VerifyEmailReq
 func (UnimplementedUsersAuthServer) Refresh(context.Context, *RefreshRequest) (*RefreshResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
-func (UnimplementedUsersAuthServer) VerifyToken(context.Context, *VerifyAccessTokenRequest) (*VerifyAccessTokenResponse, error) {
+func (UnimplementedUsersAuthServer) VerifyToken(context.Context, *VerifyTokensRequest) (*VerifyTokensResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyToken not implemented")
 }
 func (UnimplementedUsersAuthServer) mustEmbedUnimplementedUsersAuthServer() {}
@@ -258,7 +258,7 @@ func _UsersAuth_Refresh_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _UsersAuth_VerifyToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VerifyAccessTokenRequest)
+	in := new(VerifyTokensRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -270,7 +270,7 @@ func _UsersAuth_VerifyToken_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: UsersAuth_VerifyToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UsersAuthServer).VerifyToken(ctx, req.(*VerifyAccessTokenRequest))
+		return srv.(UsersAuthServer).VerifyToken(ctx, req.(*VerifyTokensRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
